@@ -1,0 +1,352 @@
+
+<head>
+  <title>Dogs</title>
+
+  <!-- This is the slder -->
+  <link href="https://cdn.jsdelivr.net/npm/simple-slider@1.5.4/dist/simple-slider.min.css" rel="stylesheet" />
+
+  <style>
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #917a94;
+      margin: 0;
+      padding: 1rem;
+      color: #932e2e;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #e48d8d;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #649bb7;
+      text-decoration: underline;
+    }
+
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+
+    /* --- Carousel  --- */
+    #dog-carousel {
+      max-width: 900px;
+      margin: 0 auto 2rem auto;
+    }
+
+    /* Override Simple Slider arrow styles */
+    .ss-arrow {
+      background-color: #523535;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: white;
+      font-size: 20px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .ss-arrow:hover {
+      background-color: #66ccff;
+    }
+
+    /* Slider images */
+    #dog-carousel img {
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      user-select: none;
+      max-height: 160px;
+      object-fit: cover;
+    }
+
+    /* --- Breed Buttons --- */
+    #breed-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #breed-buttons button {
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6em 1.3em;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 6px rgba(189, 100, 100, 0.2);
+    }
+    #breed-buttons button:hover {
+      background-color: #66ccff;
+      color: #222;
+    }
+
+    /* --- Breed Info Panel --- */
+    #breed-info {
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      background: rgb(166, 105, 105);
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: left;
+      color: #333;
+    }
+
+    #breed-info.hidden {
+      display: none;
+    }
+
+    #breed-info img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    /* --- Audio Instructions --- */
+    #audio-instructions {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: left;
+      color: #6d1818;
+    }
+    #audio-instructions h3 {
+      margin-top: 0;
+    }
+    #audio-instructions ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    #audio-instructions button {
+      margin-top: 1rem;
+      margin-right: 1rem;
+      padding: 0.5em 1.2em;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #222;
+      background: #eee;
+      transition: background-color 0.3s ease;
+    }
+    #audio-instructions button:hover {
+      background-color: #ddd;
+    }
+
+    @media (max-width: 480px) {
+      #dog-carousel img {
+        max-height: 120px;
+      }
+      #breed-buttons button {
+        font-size: 0.9rem;
+        padding: 0.5em 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="main.html">Home</a></li>
+      <li><a href="stocks.html">Stocks</a></li>
+      <li><a href="dogs.html">Dogs</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Dog Carousel</h1>
+    <div id="dog-carousel" class="ss-container" aria-label="Dog image carousel"></div>
+
+    <h2>Dog Breeds</h2>
+    <div id="breed-buttons" role="group" aria-label="Dog breed selection buttons"></div>
+
+    <div id="breed-info" class="hidden" aria-live="polite" aria-atomic="true"></div>
+  </main>
+
+  <section id="audio-instructions" aria-label="Voice command instructions">
+    <h3>Voice Commands</h3>
+    <ul>
+      <li><strong>Hello</strong> → Alert 'Hello World'</li>
+      <li><strong>Change the color to red/blue/etc</strong></li>
+      <li><strong>Navigate to home/stocks/dogs</strong></li>
+      <li><strong>Load Dog Breed Labrador</strong> → Show breed info</li>
+    </ul>
+    <button onclick="annyang.start()">Turn On Audio</button>
+    <button onclick="annyang.abort()">Turn Off Audio</button>
+  </section>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-slider@1.5.4/dist/simple-slider.min.js"></script>
+
+  <script>
+
+    function setupVoiceCommands() {
+      if (!annyang) {
+        console.warn('Annyang not available');
+        return;
+      }
+
+      const commands = {
+        'hello': () => alert('Hello World'),
+        'change the color to *color': (color) => {
+          document.body.style.backgroundColor = color;
+        },
+        'navigate to *page': (page) => {
+          const lowerPage = page.toLowerCase();
+          if (lowerPage.includes('home')) window.location.href = 'main.html';
+          else if (lowerPage.includes('stocks')) window.location.href = 'stocks.html';
+          else if (lowerPage.includes('dogs')) window.location.href = 'dogs.html';
+          else alert('Page not found');
+        },
+        'load dog breed *breed': (breed) => {
+          const buttons = document.querySelectorAll('#breed-buttons button');
+          let found = false;
+          buttons.forEach(btn => {
+            if (btn.textContent.toLowerCase() === breed.toLowerCase()) {
+              btn.click();
+              found = true;
+            }
+          });
+          if (!found) alert(`Breed "${breed}" not found`);
+        }
+      };
+
+      annyang.addCommands(commands);
+      annyang.start();
+    }
+
+ 
+    let dogSlider;
+
+    function initDogCarousel() {
+      const carousel = document.getElementById('dog-carousel');
+      if (!carousel) return;
+
+
+      carousel.innerHTML = '';
+    }
+
+    // === Fetch Dog Images for Carousel ===
+    async function loadDogImages() {
+      const carousel = document.getElementById('dog-carousel');
+      if (!carousel) return;
+
+      try {
+
+        const response = await fetch('https://api.thedogapi.com/v1/images/search?limit=10');
+        const data = await response.json();
+
+        data.forEach(dog => {
+          const img = document.createElement('img');
+          img.src = dog.url;
+          img.alt = 'Dog image';
+          img.classList.add('ss-item'); 
+          carousel.appendChild(img);
+        });
+
+        
+        if (dogSlider) dogSlider.destroy();
+        dogSlider = new SimpleSlider(carousel, {
+          loop: true,
+          navigation: true,
+          pagination: false,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          gap: 10,
+          breakpoints: {
+            768: { slidesToShow: 2 },
+            480: { slidesToShow: 1 }
+          }
+        });
+      } catch (err) {
+        console.error('Failed to load dog images:', err);
+      }
+    }
+
+    // === Fetch Dog Breeds and Create Buttons ===
+    async function loadDogBreeds() {
+      const breedButtonsContainer = document.getElementById('breed-buttons');
+      const breedInfoDiv = document.getElementById('breed-info');
+      if (!breedButtonsContainer || !breedInfoDiv) return;
+
+      try {
+   
+        const res = await fetch('https://api.thedogapi.com/v1/breeds');
+        const breeds = await res.json();
+
+        breedButtonsContainer.innerHTML = '';
+
+        breeds.forEach(breed => {
+          const btn = document.createElement('button');
+          btn.textContent = breed.name;
+          btn.type = 'button';
+
+          btn.addEventListener('click', () => {
+     
+            breedInfoDiv.classList.remove('hidden');
+            breedInfoDiv.innerHTML = `
+              <h3>${breed.name}</h3>
+              <p><strong>Temperament:</strong> ${breed.temperament || 'No description available'}</p>
+              <p><strong>Life Span:</strong> ${breed.life_span || 'Unknown'}</p>
+              ${breed.breed_group ? `<p><strong>Breed Group:</strong> ${breed.breed_group}</p>` : ''}
+              ${breed.origin ? `<p><strong>Origin:</strong> ${breed.origin}</p>` : ''}
+              ${breed.reference_image_id ? `<img src="https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg" alt="${breed.name}">` : ''}
+            `;
+
+            breedInfoDiv.scrollIntoView({ behavior: 'smooth' });
+          });
+
+          breedButtonsContainer.appendChild(btn);
+        });
+      } catch (error) {
+        console.error('Failed to load dog breeds:', error);
+      }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupVoiceCommands();
+      initDogCarousel();
+      loadDogImages();
+      loadDogBreeds();
+    });
+  </script>
+</body>
+</html>

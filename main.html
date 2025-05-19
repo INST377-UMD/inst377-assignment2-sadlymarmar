@@ -1,0 +1,175 @@
+
+<head>
+  <title>Home - Class Activities</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+
+    header {
+      background: #222;
+      color: white;
+      padding: 1rem 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .button-85 {
+      padding: 0.6em 2em;
+      border: none;
+      outline: none;
+      color: white;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+      user-select: none;
+      touch-action: manipulation;
+      margin: 0 10px 20px 10px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .button-85:hover {
+      background-color: #333;
+    }
+
+    .quote-box {
+      background: #fafafa;
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      margin: 2rem auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .quote {
+      font-size: 1.4rem;
+      font-style: italic;
+      color: #333;
+    }
+
+    .author {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #666;
+    }
+
+    #audio-instructions {
+      margin-top: 3rem;
+      background: #fff;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      color: #552f2f;
+    }
+
+    #audio-instructions h3 {
+      margin-top: 0;
+    }
+
+    #audio-instructions ul {
+      padding-left: 1.2rem;
+    }
+
+    #audio-instructions button {
+      margin-right: 1rem;
+      margin-top: 1rem;
+      padding: 0.5em 1.2em;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #222;
+      background: #eee;
+      transition: background-color 0.3s ease;
+    }
+
+    #audio-instructions button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>INST377 - Activities</h1>
+    <nav>
+      <ul>
+        <li><a href="main.html">Home</a></li>
+        <li><a href="stocks.html">Stocks</a></li>
+        <li><a href="dogs.html">Dogs</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Welcome to Class Activities</h1>
+    <button class="button-85" onclick="location.href='stocks.html'">Stocks</button>
+    <button class="button-85" onclick="location.href='dogs.html'">Dogs</button>
+
+    <div class="quote-box">
+      <div class="quote" id="quote">Loading...</div>
+      <div class="author" id="author"></div>
+    </div>
+
+    <div id="audio-instructions">
+      <h3>Voice Commands</h3>
+      <ul>
+        <li>"Hello" → Alert 'Hello World'</li>
+        <li>"Change the color to red/blue/etc"</li>
+        <li>"Navigate to home/stocks/dogs"</li>
+      </ul>
+      <button onclick="annyang.start()">Turn On Audio</button>
+      <button onclick="annyang.abort()">Turn Off Audio</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+
+    fetch('https://api.quotable.io/random')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('quote').innerText = `"${data.content}"`;
+        document.getElementById('author').innerText = `— ${data.author}`;
+      })
+      .catch(() => {
+        document.getElementById('quote').innerText = 'Failed to load quote.';
+      });
+  </script>
+</body>
+</html>
